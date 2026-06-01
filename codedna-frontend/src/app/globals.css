@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070709;
+  --foreground: #f3f4f6;
+}
+
+@theme {
+  --color-obsidian: #070709;
+  --color-surface: #121216;
+  --color-surface2: #1b1b22;
+  --color-border-dim: rgba(255, 255, 255, 0.06);
+  --color-border-glow: rgba(255, 255, 255, 0.12);
+  --color-electric-green: #00E5A0;
+  --color-cyber-blue: #0066FF;
+  --color-neon-purple: #A855F7;
+  --color-coral-red: #FF4444;
+  --color-text: #f3f4f6;
+  --color-muted: #8b949e;
+  
+  --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Glassmorphism utility helpers */
+.glass {
+  background: rgba(18, 18, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-glow {
+  box-shadow: 0 0 25px rgba(0, 229, 160, 0.04);
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #A855F7 0%, #0066FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, #00E5A0 0%, #0066FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

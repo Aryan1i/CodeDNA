@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String            @id @default(uuid())
+  email            String            @unique
+  password         String
+  role             String            @default("DEVELOPER") // "DEVELOPER", "RECRUITER", "TPO"
+  name             String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  developerProfile DeveloperProfile?
+}
+
+model DeveloperProfile {
+  id                  String                 @id @default(uuid())
+  userId              String                 @unique
+  user                User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  githubUsername      String?
+  leetcodeUsername    String?
+  vercelToken         String?
+  gitlabUsername      String?
+  codeforcesUsername  String?
+  kaggleUsername      String?
+  huggingfaceUsername String?
+  netlifyToken        String?
+  renderToken         String?
+  gsocUsername        String?
+  gssocUsername       String?
+  overallScore        Float                  @default(0)
+  hardSkillsScore     Float                  @default(0)
+  softSkillsScore     Float                  @default(0)
+  builderSkillsScore  Float                  @default(0)
+  isVerified          Boolean                @default(false)
+  skillsGraph         Json?                  // Visual tech stack map
+  bio                 String?
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  githubStats         GitHubStats?
+  leetcodeStats       LeetCodeStats?
+  vercelStats         VercelStats?
+  gitlabStats         Json?
+  codeforcesStats     Json?
+  kaggleStats         Json?
+  huggingfaceStats    Json?
+  netlifyStats        Json?
+  renderStats         Json?
+  gsocStats           Json?
+  gssocStats          Json?
+  projects            Project[]
+  profileEmbedding    ProfileEmbedding?
+}
+
+model GitHubStats {
+  id             String           @id @default(uuid())
+  profileId      String           @unique
+  profile        DeveloperProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  commitCount    Int              @default(0)
+  prCount        Int              @default(0)
+  prReviewsCount Int              @default(0)
+  issuesCount    Int              @default(0)
+  languages      Json?            // Language split mapping: e.g. { "TypeScript": 12048, "Go": 4820 }
+  lastSyncedAt   DateTime         @default(now())
+}
+
+model LeetCodeStats {
+  id             String           @id @default(uuid())
+  profileId      String           @unique
+  profile        DeveloperProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  totalSolved    Int              @default(0)
+  easySolved     Int              @default(0)
+  mediumSolved   Int              @default(0)
+  hardSolved     Int              @default(0)
+  contestRating  Float?
+  activityStreak Int              @default(0)
+  lastSyncedAt   DateTime         @default(now())
+}
+
+model VercelStats {
+  id              String           @id @default(uuid())
+  profileId       String           @unique
+  profile         DeveloperProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  projectCount    Int              @default(0)
+  deploymentCount Int              @default(0)
+  lastSyncedAt    DateTime         @default(now())
+}
+
+model Project {
+  id                     String                 @id @default(uuid())
+  profileId              String
+  profile                DeveloperProfile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  name                   String
+  description            String?
+  repoUrl                String?
+  liveUrl                String?
+  stars                  Int                    @default(0)
+  forks                  Int                    @default(0)
+  languages              Json?
+  isVerified             Boolean                @default(false)
+  verificationConfidence Float                  @default(0)
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  verificationQuestions  VerificationQuestion[]
+}
+
+model VerificationQuestion {
+  id             String    @id @default(uuid())
+  projectId      String
+  project        Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  question       String
+  codeSnippet    String?
+  lineReference  Int?
+  expectedAnswer String?   // Generated rubric or expected choice
+  userAnswer     String?
+  isCorrect      Boolean?
+  gradedAt       DateTime?
+  createdAt      DateTime  @default(now())
+}
+
+// Storing metadata summaries for Vibe Hiring search embeddings.
+// The raw vector column will be added via migration: ALTER TABLE "ProfileEmbedding" ADD COLUMN embedding vector(1536);
+model ProfileEmbedding {
+  id            String           @id @default(uuid())
+  profileId     String           @unique
+  profile       DeveloperProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  embeddingText String           // Text block describing the developer's tech stack, experience & vibe
+  updatedAt     DateTime         @updatedAt
+}
+
