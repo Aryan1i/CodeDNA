@@ -40,6 +40,18 @@
   --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-space-grotesk), sans-serif;
   --font-mono: var(--font-ibm-plex-mono), monospace;
+
+  /* Global scaled up font size hierarchy */
+  --font-size-xs: 0.825rem;
+  --font-size-sm: 0.95rem;
+  --font-size-base: 1.075rem;
+  --font-size-lg: 1.225rem;
+  --font-size-xl: 1.35rem;
+  --font-size-2xl: 1.625rem;
+  --font-size-3xl: 2.05rem;
+  --font-size-4xl: 2.55rem;
+  --font-size-5xl: 3.3rem;
+  --font-size-6xl: 4.1rem;
 }
 
 body {
