@@ -226,7 +226,7 @@ export default function Home() {
       <div className="absolute bottom-10 left-0 w-[500px] h-[500px] rounded-full bg-neon-purple/2 pointer-events-none blur-[120px]" />
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern bg-[size:32px_32px] pointer-events-none" />
 
       {/* Header/Nav */}
       <header className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center relative z-20">

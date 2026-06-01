@@ -10,18 +10,28 @@
   --border-glow: rgba(255, 255, 255, 0.12);
   --text: #f3f4f6;
   --muted: #8b949e;
+  
+  --electric-green: #00E5A0;
+  --cyber-blue: #0066FF;
+  --neon-purple: #A855F7;
+  --coral-red: #FF4444;
 }
 
 :root.light {
   --background: #f8fafc;
   --foreground: #0f172a;
   --obsidian: #f8fafc;
-  --surface: rgba(255, 255, 255, 0.85);
+  --surface: rgba(255, 255, 255, 0.95);
   --surface2: #e2e8f0;
   --border-dim: rgba(0, 0, 0, 0.08);
   --border-glow: rgba(0, 0, 0, 0.15);
   --text: #0f172a;
   --muted: #64748b;
+  
+  --electric-green: #00875a; /* High contrast forest-teal green for light background */
+  --cyber-blue: #0052cc;     /* Deep rich blue */
+  --neon-purple: #7c3aed;    /* Highly readable purple */
+  --coral-red: #d32f2f;      /* Rich readable red */
 }
 
 @theme {
@@ -30,10 +40,10 @@
   --color-surface2: var(--surface2);
   --color-border-dim: var(--border-dim);
   --color-border-glow: var(--border-glow);
-  --color-electric-green: #00E5A0;
-  --color-cyber-blue: #0066FF;
-  --color-neon-purple: #A855F7;
-  --color-coral-red: #FF4444;
+  --color-electric-green: var(--electric-green);
+  --color-cyber-blue: var(--cyber-blue);
+  --color-neon-purple: var(--neon-purple);
+  --color-coral-red: var(--coral-red);
   --color-text: var(--text);
   --color-muted: var(--muted);
   
@@ -92,6 +102,16 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Custom background grid pattern utility */
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+.light .bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px) !important;
+}
+
 /* =======================================================
    LIGHT MODE UTILITY OVERRIDES (Safe Theme Switching)
    ======================================================= */
@@ -102,28 +122,111 @@ body {
   color: #64748b !important;
 }
 .light .bg-surface {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
 }
 .light .bg-surface\/50 {
-  background-color: rgba(255, 255, 255, 0.55) !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Borders in light mode */
+.light .border-white\/3 {
+  border-color: rgba(0, 0, 0, 0.04) !important;
 }
 .light .border-white\/5 {
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 .light .border-white\/10 {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
 }
-.light .border-white\/3 {
-  border-color: rgba(0, 0, 0, 0.05) !important;
+.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.22) !important;
 }
+.light .border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.3) !important;
+}
+.light .border-white\/40 {
+  border-color: rgba(0, 0, 0, 0.4) !important;
+}
+.light .border-white\/50 {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Opacity overlay backgrounds in light mode */
 .light .bg-white\/2 {
-  background-color: rgba(0, 0, 0, 0.03) !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
 }
 .light .bg-white\/5 {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
 }
 .light .bg-white\/10 {
   background-color: rgba(0, 0, 0, 0.08) !important;
+}
+.light .bg-white\/20 {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.light .bg-white\/30 {
+  background-color: rgba(0, 0, 0, 0.22) !important;
+}
+.light .bg-white\/40 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.light .bg-white\/50 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+.light .bg-white\/60 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.light .bg-white\/80 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Dark elements/consoles in light mode */
+.light .bg-black {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+.light .bg-black\/30 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+.light .bg-black\/40 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+.light .bg-black\/50 {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+.light .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.09) !important;
+}
+.light .bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Gray and Slate text color utilities in light mode */
+.light .text-gray-100 { color: #1e293b !important; }
+.light .text-gray-200 { color: #334155 !important; }
+.light .text-gray-300 { color: #475569 !important; }
+.light .text-gray-400 { color: #64748b !important; }
+.light .text-gray-500 { color: #64748b !important; }
+.light .text-gray-600 { color: #475569 !important; }
+.light .text-gray-800 { color: #1e293b !important; }
+.light .text-gray-900 { color: #0f172a !important; }
+
+.light .text-slate-100 { color: #1e293b !important; }
+.light .text-slate-200 { color: #334155 !important; }
+.light .text-slate-300 { color: #475569 !important; }
+.light .text-slate-400 { color: #64748b !important; }
+.light .text-slate-500 { color: #64748b !important; }
+.light .text-slate-600 { color: #475569 !important; }
+
+/* Input field placeholders in light mode */
+.light ::placeholder {
+  color: #94a3b8 !important;
+}
+.light input::placeholder {
+  color: #94a3b8 !important;
+}
+.light textarea::placeholder {
+  color: #94a3b8 !important;
 }
 
 /* Interactive SVG Skill Graph overrides in light mode */
