@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import ParticleGrid from "@/components/ParticleGrid";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html lang="en" className={`h-full antialiased ${spaceGrotesk.variable} ${instrumentSans.variable} ${ibmPlexMono.variable}`}>
       <body className="min-h-full bg-obsidian text-text font-sans flex flex-col relative overflow-x-hidden">
         <ParticleGrid />
+        <ThemeToggle />
         {children}
       </body>
     </html>

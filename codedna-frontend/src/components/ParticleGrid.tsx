@@ -44,8 +44,9 @@ export default function ParticleGrid() {
         this.vy = 0;
         this.radius = 1.2;
         this.targetRadius = 1.2;
-        this.color = "rgba(255, 255, 255, 0.1)";
-        this.targetColor = "rgba(255, 255, 255, 0.1)";
+        const isLight = typeof document !== "undefined" && document.documentElement.classList.contains("light");
+        this.color = isLight ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.1)";
+        this.targetColor = isLight ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.1)";
       }
 
       update() {
@@ -76,7 +77,8 @@ export default function ParticleGrid() {
           this.y += (this.originalY - this.y) * 0.08;
           
           this.targetRadius = 1.2;
-          this.targetColor = "rgba(255, 255, 255, 0.12)";
+          const isLight = document.documentElement.classList.contains("light");
+          this.targetColor = isLight ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.12)";
         }
 
         // Smoothly animate radius and color transitions

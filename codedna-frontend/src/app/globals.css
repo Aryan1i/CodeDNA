@@ -3,20 +3,39 @@
 :root {
   --background: #070709;
   --foreground: #f3f4f6;
+  --obsidian: #070709;
+  --surface: rgba(18, 18, 22, 0.85);
+  --surface2: #1b1b22;
+  --border-dim: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(255, 255, 255, 0.12);
+  --text: #f3f4f6;
+  --muted: #8b949e;
+}
+
+:root.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --obsidian: #f8fafc;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface2: #e2e8f0;
+  --border-dim: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(0, 0, 0, 0.15);
+  --text: #0f172a;
+  --muted: #64748b;
 }
 
 @theme {
-  --color-obsidian: #070709;
-  --color-surface: #121216;
-  --color-surface2: #1b1b22;
-  --color-border-dim: rgba(255, 255, 255, 0.06);
-  --color-border-glow: rgba(255, 255, 255, 0.12);
+  --color-obsidian: var(--obsidian);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-border-dim: var(--border-dim);
+  --color-border-glow: var(--border-glow);
   --color-electric-green: #00E5A0;
   --color-cyber-blue: #0066FF;
   --color-neon-purple: #A855F7;
   --color-coral-red: #FF4444;
-  --color-text: #f3f4f6;
-  --color-muted: #8b949e;
+  --color-text: var(--text);
+  --color-muted: var(--muted);
   
   --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-space-grotesk), sans-serif;
@@ -29,14 +48,16 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Glassmorphism utility helpers */
 .glass {
-  background: rgba(18, 18, 22, 0.7);
+  background: var(--surface);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-dim);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-glow {
@@ -54,4 +75,59 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* =======================================================
+   LIGHT MODE UTILITY OVERRIDES (Safe Theme Switching)
+   ======================================================= */
+.light .text-white {
+  color: #0f172a !important;
+}
+.light .text-muted {
+  color: #64748b !important;
+}
+.light .bg-surface {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+.light .bg-surface\/50 {
+  background-color: rgba(255, 255, 255, 0.55) !important;
+}
+.light .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+.light .border-white\/3 {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+.light .bg-white\/2 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Interactive SVG Skill Graph overrides in light mode */
+.light svg text {
+  fill: #0f172a !important;
+}
+.light svg line {
+  stroke: rgba(0, 0, 0, 0.12) !important;
+}
+.light svg circle[stroke^="rgba(255,255,255"] {
+  stroke: rgba(0, 0, 0, 0.1) !important;
+}
+.light svg circle[fill="rgba(0,0,0,0.5)"] {
+  fill: rgba(255, 255, 255, 0.6) !important;
+}
+.light svg circle[fill="#121216"] {
+  fill: #ffffff !important;
+}
+.light svg text[fill="#8b949e"] {
+  fill: #64748b !important;
+}
+
 
