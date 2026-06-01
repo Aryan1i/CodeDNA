@@ -278,7 +278,7 @@ export default function Home() {
           <span className="bg-electric-green/10 text-electric-green border border-electric-green/20 text-xs px-3.5 py-1.5 rounded-full font-mono tracking-wide inline-block">
             Continuous-Verification Developer Identity & Talent Ecosystem
           </span>
-          <h2 className="text-4xl sm:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.05]">
+          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight leading-[1.05]">
             Get hired for <br />
             <span className="text-electric-green">what you build</span>, <br />
             not where you study.
