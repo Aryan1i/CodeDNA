@@ -190,6 +190,15 @@ export default function Dashboard() {
   const [challengeSuccess, setChallengeSuccess] = useState("");
   const [hoveredNodeTooltip, setHoveredNodeTooltip] = useState<string | null>(null);
 
+  const getGlowFilter = (color: string) => {
+    const c = color.toLowerCase();
+    if (c.includes("00e5a0") || c.includes("00875a") || c.includes("green")) return "url(#glow-green)";
+    if (c.includes("0066ff") || c.includes("0052cc") || c.includes("00f0ff") || c.includes("cyan")) return "url(#glow-cyan)";
+    if (c.includes("aa44ff") || c.includes("7c3aed") || c.includes("purple")) return "url(#glow-purple)";
+    if (c.includes("ffb800") || c.includes("ff4444") || c.includes("d32f2f") || c.includes("orange")) return "url(#glow-red)";
+    return undefined;
+  };
+
   const getSkillsNodes = () => {
     const nodes: any[] = [];
     const connections: any[] = [];
@@ -722,25 +731,27 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-transparent text-white font-sans flex flex-col">
       {/* Navbar */}
-      <nav className="border-b border-white/5 bg-surface/50 backdrop-blur px-8 py-4 flex justify-between items-center sticky top-0 z-20">
-        <div className="flex items-center gap-3">
-          <span className="text-xl font-heading font-extrabold text-white">
-            Code<span className="text-electric-green">DNA</span>
-          </span>
-          <span className="bg-electric-green/10 text-electric-green px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-wider font-semibold">
-            Passport Console
-          </span>
-        </div>
-        <div className="flex items-center gap-6">
-          <span className="text-xs text-muted font-mono">{user.email}</span>
-          <button onClick={logout} className="text-xs text-coral-red hover:underline focus:outline-none cursor-pointer">
-            Sign Out
-          </button>
+      <nav className="border-b border-white/5 bg-surface/50 backdrop-blur py-4 sticky top-0 z-20">
+        <div className="max-w-[98%] mx-auto px-2 md:px-4 flex justify-between items-center w-full">
+          <div className="flex items-center gap-3">
+            <span className="text-xl font-heading font-extrabold text-white">
+              Code<span className="text-electric-green">DNA</span>
+            </span>
+            <span className="bg-electric-green/10 text-electric-green px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-wider font-semibold">
+              Passport Console
+            </span>
+          </div>
+          <div className="flex items-center gap-6">
+            <span className="text-xs text-muted font-mono">{user.email}</span>
+            <button onClick={logout} className="text-xs text-coral-red hover:underline focus:outline-none cursor-pointer">
+              Sign Out
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-6xl w-full mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <main className="flex-1 max-w-[98%] w-full mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Left Column: Sync Setup & Overall Score */}
         <div className="space-y-6 md:col-span-1">
@@ -1005,19 +1016,106 @@ export default function Dashboard() {
               {/* SVG Canvas (8 cols) */}
               <div className="md:col-span-8 bg-black/40 rounded-xl border border-white/3 relative overflow-hidden flex items-center justify-center p-2">
                 <svg className="w-full h-[280px]" viewBox="0 0 400 300">
-                  {/* Connection Lines */}
+                  {/* WebGL/Hologram Style Shader Defs */}
+                  <defs>
+                    <style>{`
+                      @keyframes flow-dash {
+                        to {
+                          stroke-dashoffset: -20;
+                        }
+                      }
+                      @keyframes pulse-ring {
+                        0% { r: 32; opacity: 0.5; }
+                        100% { r: 56; opacity: 0; }
+                      }
+                      .telemetry-flow-line {
+                        stroke-dasharray: 6, 6;
+                        animation: flow-dash 1.2s linear infinite;
+                      }
+                      .glow-ring {
+                        transform-origin: 200px 150px;
+                        animation: pulse-ring 3s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+                      }
+                    `}</style>
+                    <filter id="glow-green" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4" result="blur" />
+                      <feComponentTransfer in="blur" result="glow">
+                        <feFuncA type="linear" slope="0.75"/>
+                      </feComponentTransfer>
+                      <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4" result="blur" />
+                      <feComponentTransfer in="blur" result="glow">
+                        <feFuncA type="linear" slope="0.6"/>
+                      </feComponentTransfer>
+                      <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <filter id="glow-purple" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4" result="blur" />
+                      <feComponentTransfer in="blur" result="glow">
+                        <feFuncA type="linear" slope="0.6"/>
+                      </feComponentTransfer>
+                      <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <filter id="glow-red" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4" result="blur" />
+                      <feComponentTransfer in="blur" result="glow">
+                        <feFuncA type="linear" slope="0.6"/>
+                      </feComponentTransfer>
+                      <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* Concentric Telemetry Radar Background Grid */}
+                  <circle cx="200" cy="150" r="65" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="3,3" />
+                  <circle cx="200" cy="150" r="125" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" strokeDasharray="4,4" />
+                  
+                  {/* Central Radar Glowing Sonar Sweep Rings */}
+                  {profile?.overallScore && (
+                    <>
+                      <circle cx="200" cy="150" r="32" fill="none" stroke="var(--electric-green)" strokeWidth="1.5" className="glow-ring" />
+                      <circle cx="200" cy="150" r="32" fill="none" stroke="var(--electric-green)" strokeWidth="1" className="glow-ring" style={{ animationDelay: '1.5s' }} />
+                    </>
+                  )}
+
+                  {/* Connection Lines (Flow Pipelines) */}
                   {getSkillsNodes().connections.map((conn, idx) => (
-                    <line
-                      key={idx}
-                      x1={conn.x1}
-                      y1={conn.y1}
-                      x2={conn.x2}
-                      y2={conn.y2}
-                      stroke={conn.color}
-                      strokeWidth="1.5"
-                      strokeOpacity="0.4"
-                      className="animate-pulse"
-                    />
+                    <g key={idx}>
+                      {/* Ambient Connection Line */}
+                      <line
+                        x1={conn.x1}
+                        y1={conn.y1}
+                        x2={conn.x2}
+                        y2={conn.y2}
+                        stroke={conn.color}
+                        strokeWidth="1.2"
+                        strokeOpacity="0.12"
+                      />
+                      {/* Telemetry Animated Data flow */}
+                      <line
+                        x1={conn.x1}
+                        y1={conn.y1}
+                        x2={conn.x2}
+                        y2={conn.y2}
+                        stroke={conn.color}
+                        strokeWidth="1.6"
+                        strokeOpacity="0.7"
+                        className="telemetry-flow-line"
+                      />
+                    </g>
                   ))}
                   
                   {/* Nodes */}
@@ -1028,6 +1126,17 @@ export default function Dashboard() {
                       onMouseEnter={() => setHoveredNodeTooltip(node.tooltip)}
                       onMouseLeave={() => setHoveredNodeTooltip(null)}
                     >
+                      {/* Interactive Radar Lock Ticks for Center Node */}
+                      {node.id === "center" && (
+                        <>
+                          <line x1={node.cx - 38} y1={node.cy} x2={node.cx - 35} y2={node.cy} stroke={node.color} strokeWidth="1.2" strokeOpacity="0.8" />
+                          <line x1={node.cx + 35} y1={node.cy} x2={node.cx + 38} y2={node.cy} stroke={node.color} strokeWidth="1.2" strokeOpacity="0.8" />
+                          <line x1={node.cx} y1={node.cy - 38} x2={node.cx} y2={node.cy - 35} stroke={node.color} strokeWidth="1.2" strokeOpacity="0.8" />
+                          <line x1={node.cx} y1={node.cy + 35} x2={node.cx} y2={node.cy + 38} stroke={node.color} strokeWidth="1.2" strokeOpacity="0.8" />
+                        </>
+                      )}
+
+                      {/* Glowing Node Circle */}
                       <circle
                         cx={node.cx}
                         cy={node.cy}
@@ -1035,6 +1144,7 @@ export default function Dashboard() {
                         fill={`${node.color}15`}
                         stroke={node.color}
                         strokeWidth="1.5"
+                        filter={getGlowFilter(node.color)}
                         className="transition-all duration-300 group-hover:scale-110 group-hover:stroke-white"
                         style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
                       />
@@ -1067,21 +1177,42 @@ export default function Dashboard() {
 
               {/* Node Inspect Details / Tooltip Panel (4 cols) */}
               <div className="md:col-span-4 h-full flex flex-col justify-center space-y-4">
-                <div className="p-4 rounded-lg bg-surface border border-white/5 h-[160px] flex flex-col justify-between text-left">
+                <div className="p-4 rounded-lg bg-surface border border-white/5 h-[160px] flex flex-col justify-between text-left relative overflow-hidden shadow-[inset_0_0_15px_rgba(255,255,255,0.015)]">
                   <div>
-                    <span className="text-[8px] font-mono text-muted uppercase block mb-1">Node Inspector</span>
+                    <span className="text-[8px] font-mono text-muted uppercase block mb-1">HUD Diagnostics Node Inspector</span>
                     {hoveredNodeTooltip ? (
-                      <p className="text-[10px] font-mono text-electric-green whitespace-pre-line leading-relaxed">
-                        {hoveredNodeTooltip}
-                      </p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[9px] font-bold text-white uppercase font-mono tracking-wide">
+                            {hoveredNodeTooltip.split('\n')[0].split(':')[0]}
+                          </span>
+                          <span className="bg-electric-green/10 text-electric-green text-[7px] font-mono px-1.5 py-0.5 rounded border border-electric-green/30 uppercase tracking-widest animate-pulse leading-none">
+                            ACTIVE STACK
+                          </span>
+                        </div>
+                        <div className="text-[10px] font-mono text-gray-200 whitespace-pre-line leading-relaxed bg-white/2 p-2 rounded border border-white/5 shadow-inner">
+                          {hoveredNodeTooltip.split('\n').slice(1).join('\n')}
+                        </div>
+                      </div>
                     ) : (
-                      <p className="text-[10px] text-muted italic leading-relaxed">
-                        Hover over any skill node in the graph network to inspect vetted repository counts, parsed coding volumes, and language depths.
-                      </p>
+                      // Dynamic HUD Status readout logger
+                      <div className="space-y-2 font-mono text-[9px] text-muted">
+                        <div className="flex items-center gap-1.5 text-electric-green/80">
+                          <span className="w-1.5 h-1.5 rounded-full bg-electric-green animate-ping" />
+                          <span className="font-bold tracking-wide">COGNITIVE STACK MONITOR ACTIVE</span>
+                        </div>
+                        <div className="space-y-0.5 text-[8px] opacity-75">
+                          <div className="text-gray-300 font-semibold">&gt; Syncing repository crawl channels... OK</div>
+                          <div>&gt; Calculating code semantic vectors... OK</div>
+                          <div>&gt; Verifying bytecode checksum signature... OK</div>
+                          <div className="text-gray-300">&gt; Vetted developer overall score loaded.</div>
+                        </div>
+                      </div>
                     )}
                   </div>
-                  <div className="text-[8px] text-muted font-mono pt-2 border-t border-white/5 leading-none">
-                    Status: Dynamic tracking active
+                  <div className="text-[8px] text-muted font-mono pt-2 border-t border-white/5 flex justify-between items-center leading-none">
+                    <span>STATUS: 200 OK</span>
+                    <span className="animate-pulse">SYS: ONLINE</span>
                   </div>
                 </div>
               </div>

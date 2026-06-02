@@ -223,25 +223,27 @@ export default function Recruiter() {
   return (
     <div className="min-h-screen bg-transparent text-white font-sans flex flex-col">
       {/* Navbar */}
-      <nav className="border-b border-white/5 bg-surface/50 backdrop-blur px-8 py-4 flex justify-between items-center sticky top-0 z-20">
-        <div className="flex items-center gap-3">
-          <span className="text-xl font-heading font-extrabold text-white">
-            Code<span className="text-electric-green">DNA</span>
-          </span>
-          <span className="bg-cyber-blue/10 text-cyber-blue px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-wider font-semibold border border-cyber-blue/20">
-            Recruiter Suite
-          </span>
-        </div>
-        <div className="flex items-center gap-6">
-          <span className="text-xs text-muted font-mono">{user.email}</span>
-          <button onClick={logout} className="text-xs text-coral-red hover:underline focus:outline-none cursor-pointer">
-            Sign Out
-          </button>
+      <nav className="border-b border-white/5 bg-surface/50 backdrop-blur py-4 sticky top-0 z-20">
+        <div className="max-w-[98%] mx-auto px-2 md:px-4 flex justify-between items-center w-full">
+          <div className="flex items-center gap-3">
+            <span className="text-xl font-heading font-extrabold text-white">
+              Code<span className="text-electric-green">DNA</span>
+            </span>
+            <span className="bg-cyber-blue/10 text-cyber-blue px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-wider font-semibold border border-cyber-blue/20">
+              Recruiter Suite
+            </span>
+          </div>
+          <div className="flex items-center gap-6">
+            <span className="text-xs text-muted font-mono">{user.email}</span>
+            <button onClick={logout} className="text-xs text-coral-red hover:underline focus:outline-none cursor-pointer">
+              Sign Out
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-6xl w-full mx-auto p-8 space-y-8">
+      <main className="flex-1 max-w-[98%] w-full mx-auto p-4 md:p-8 space-y-8">
         
         {/* Search Header */}
         <div className="text-center space-y-3">
