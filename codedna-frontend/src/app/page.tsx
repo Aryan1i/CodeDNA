@@ -229,49 +229,61 @@ export default function Home() {
       <div className="absolute inset-0 bg-grid-pattern bg-[size:32px_32px] pointer-events-none" />
 
       {/* Header/Nav */}
-      <header className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center relative z-20">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl font-heading font-extrabold text-white tracking-tight">
-            Code<span className="text-electric-green">DNA</span>
-          </span>
-          <span className="bg-white/5 text-muted px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-wider font-semibold border border-white/5">
-            Passport v2.0
-          </span>
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 bg-surface/40 backdrop-blur-lg py-3 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.15)]">
+        <div className="max-w-[98%] mx-auto px-2 md:px-4 flex justify-between items-center w-full">
+          
+          {/* Logo & Pulse Indicator */}
+          <div className="flex items-center gap-3 select-none">
+            <div className="relative flex items-center justify-center">
+              <span className="w-2.5 h-2.5 rounded-full bg-electric-green animate-ping absolute opacity-75" />
+              <span className="w-2 h-2 rounded-full bg-electric-green relative shadow-[0_0_12px_var(--electric-green)]" />
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-heading font-extrabold text-white tracking-tight hover:scale-[1.01] transition-transform duration-200 cursor-pointer">
+                Code<span className="text-electric-green">DNA</span>
+              </span>
+              <span className="bg-electric-green/10 text-electric-green border border-electric-green/20 text-[8px] uppercase font-mono tracking-widest font-bold px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,229,160,0.05)]">
+                Passport v2.0
+              </span>
+            </div>
+          </div>
 
-        <nav className="hidden md:flex items-center gap-6 text-[10px] font-mono text-muted uppercase tracking-wider">
-          <a href="#features" className="hover:text-white transition-colors">Dev Features</a>
-          <a href="#recruiter-features" className="hover:text-white transition-colors">Recruiter SaaS</a>
-          <a href="#compare" className="hover:text-white transition-colors">Compare</a>
-          <a href="#moats" className="hover:text-white transition-colors">Our Moats</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          <a href="#formula" className="hover:text-white transition-colors">Simulator</a>
-        </nav>
+          {/* Interactive Pill Nav Links */}
+          <nav className="hidden md:flex items-center gap-1.5 text-[9px] font-mono text-muted uppercase tracking-wider">
+            <a href="#features" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Dev Features</a>
+            <a href="#recruiter-features" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Recruiter SaaS</a>
+            <a href="#compare" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Compare</a>
+            <a href="#moats" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Our Moats</a>
+            <a href="#pricing" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Pricing</a>
+            <a href="#formula" className="hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-full transition-all duration-300">Simulator</a>
+          </nav>
 
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => openAuth("DEVELOPER", true)}
-            className="text-xs font-mono text-muted hover:text-white transition-colors px-3 py-1.5 focus:outline-none cursor-pointer"
-          >
-            Sign In
-          </button>
-          <button
-            onClick={() => openAuth("DEVELOPER", false)}
-            className="text-xs font-mono font-semibold border border-electric-green/20 hover:border-electric-green/80 text-electric-green px-4 py-2 rounded-lg transition-all focus:outline-none cursor-pointer hover:shadow-[0_0_15px_rgba(0,229,160,0.1)]"
-          >
-            For Developers
-          </button>
-          <button
-            onClick={() => openAuth("RECRUITER", false)}
-            className="text-xs font-heading font-semibold bg-cyber-blue text-white px-4 py-2 rounded-lg hover:bg-cyber-blue/90 transition-all focus:outline-none cursor-pointer hover:shadow-[0_0_15px_rgba(0,102,255,0.2)]"
-          >
-            Hire Talents
-          </button>
+          {/* High-fidelity CTAs */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => openAuth("DEVELOPER", true)}
+              className="text-xs font-mono text-muted hover:text-white transition-all duration-200 px-3.5 py-1.5 rounded-lg hover:bg-white/5 focus:outline-none cursor-pointer"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => openAuth("DEVELOPER", false)}
+              className="text-[11px] font-mono font-semibold border border-electric-green/20 hover:border-electric-green text-electric-green px-4 py-2 rounded-xl transition-all duration-300 focus:outline-none cursor-pointer hover:shadow-[0_0_20px_rgba(0,229,160,0.25)] hover:scale-[1.02] active:scale-[0.98]"
+            >
+              For Developers
+            </button>
+            <button
+              onClick={() => openAuth("RECRUITER", false)}
+              className="text-[11px] font-heading font-semibold bg-cyber-blue text-white px-4 py-2 rounded-xl hover:bg-cyber-blue/90 transition-all duration-300 focus:outline-none cursor-pointer hover:shadow-[0_0_25px_rgba(0,102,255,0.4)] hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Hire Talents
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-6 pt-16 pb-24 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="max-w-[98%] mx-auto px-2 md:px-4 pt-28 pb-24 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         {/* Marketing Hook */}
         <div className="space-y-6 text-center lg:text-left">
@@ -367,7 +379,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 1: PROBLEM & SOLUTION PHILOSOPHY */}
-      <section id="problem" className="max-w-6xl mx-auto px-6 py-24 border-t border-white/5 relative z-10">
+      <section id="problem" className="max-w-[98%] mx-auto px-2 md:px-4 py-24 border-t border-white/5 relative z-10">
         <div className="text-center max-w-xl mx-auto mb-16 space-y-3">
           <span className="bg-coral-red/10 text-coral-red border border-coral-red/20 text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded">The Vetting Problem</span>
           <h3 className="text-3xl font-heading font-extrabold text-white">The Broken Tech Talent Funnel</h3>
@@ -436,7 +448,7 @@ export default function Home() {
       </section>
 
       {/* Real Vetting Chat Dialogue Section (High-fidelity replica matching user screenshot) */}
-      <section id="dialogue" className="max-w-6xl mx-auto px-6 py-24 border-t border-white/5 relative z-10">
+      <section id="dialogue" className="max-w-[98%] mx-auto px-2 md:px-4 py-24 border-t border-white/5 relative z-10">
         <div className="text-center max-w-xl mx-auto mb-16 space-y-3">
           <span className="bg-electric-green/10 text-electric-green border border-electric-green/20 text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded">Vetting Dialogue Simulator</span>
           <h3 className="text-3xl font-heading font-extrabold text-white">Verified Open Source Contributors</h3>
@@ -491,7 +503,7 @@ export default function Home() {
       </section>
 
       {/* Long Alternating Features Sections */}
-      <section id="features" className="max-w-6xl mx-auto px-6 py-24 border-t border-white/5 space-y-32 relative z-10">
+      <section id="features" className="max-w-[98%] mx-auto px-2 md:px-4 py-24 border-t border-white/5 space-y-32 relative z-10">
         
         {/* Section Title */}
         <div className="text-center max-w-lg mx-auto space-y-3">
@@ -1104,7 +1116,7 @@ export default function Home() {
       </section>
 
       {/* Recruiter Platform Features Section */}
-      <section id="recruiter-features" className="max-w-6xl mx-auto px-6 py-24 border-t border-white/5 space-y-32 relative z-10">
+      <section id="recruiter-features" className="max-w-[98%] mx-auto px-2 md:px-4 py-24 border-t border-white/5 space-y-32 relative z-10">
         
         {/* Section Title */}
         <div className="text-center max-w-lg mx-auto space-y-3">
@@ -1579,7 +1591,7 @@ export default function Home() {
       </section>
 
       {/* Comparative Vetting Section (Stripped Company Names) */}
-      <section id="compare" className="max-w-6xl mx-auto px-6 py-20 border-t border-white/5 relative z-10">
+      <section id="compare" className="max-w-[98%] mx-auto px-2 md:px-4 py-20 border-t border-white/5 relative z-10">
         <div className="text-center max-w-lg mx-auto space-y-4 mb-16">
           <h3 className="text-3xl font-heading font-extrabold text-white">Competitive Vetting Landscape</h3>
           <p className="text-muted text-xs">How CodeDNA compares to legacy screening approaches and traditional job boards.</p>
@@ -1632,7 +1644,7 @@ export default function Home() {
       </section>
 
       {/* Moats Strategy Section */}
-      <section id="moats" className="max-w-6xl mx-auto px-6 py-20 border-t border-white/5 relative z-10">
+      <section id="moats" className="max-w-[98%] mx-auto px-2 md:px-4 py-20 border-t border-white/5 relative z-10">
         <div className="text-center max-w-lg mx-auto space-y-4 mb-16">
           <span className="bg-electric-green/10 text-electric-green border border-electric-green/20 text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded">Defensive Strategy</span>
           <h3 className="text-3xl font-heading font-extrabold text-white">Compounding Platform Moats</h3>
@@ -1705,7 +1717,7 @@ export default function Home() {
 
 
       {/* Monetization Section */}
-      <section id="pricing" className="max-w-6xl mx-auto px-6 py-20 border-t border-white/5 relative z-10">
+      <section id="pricing" className="max-w-[98%] mx-auto px-2 md:px-4 py-20 border-t border-white/5 relative z-10">
         <div className="text-center max-w-lg mx-auto space-y-4 mb-16">
           <span className="bg-neon-purple/10 text-neon-purple border border-neon-purple/20 text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded">Pricing structure</span>
           <h3 className="text-3xl font-heading font-extrabold text-white">Transparent Pricing Model</h3>
@@ -1794,7 +1806,7 @@ export default function Home() {
 
 
       {/* The Scoring Index details & Simulator */}
-      <section id="formula" className="max-w-6xl mx-auto px-6 py-24 border-t border-white/5 relative z-10">
+      <section id="formula" className="max-w-[98%] mx-auto px-2 md:px-4 py-24 border-t border-white/5 relative z-10">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-16">
           <span className="bg-neon-purple/10 text-neon-purple border border-neon-purple/20 text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded">Interactive Vetting & Simulator</span>
           <h3 className="text-4xl font-heading font-extrabold text-white">Dynamic Score & Compensation Simulator</h3>
@@ -1975,7 +1987,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer id="how-it-works" className="max-w-6xl mx-auto px-6 py-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-muted font-mono relative z-10 bg-obsidian/40 backdrop-blur-sm">
+      <footer id="how-it-works" className="max-w-[98%] mx-auto px-2 md:px-4 py-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-muted font-mono relative z-10 bg-obsidian/40 backdrop-blur-sm">
         <div>© 2026 CodeDNA Ecosystem. All rights reserved.</div>
         <div className="flex gap-6 mt-4 sm:mt-0">
           <span>Aryan Gupta & Amrita Singh</span>

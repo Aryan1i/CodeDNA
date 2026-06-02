@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -47,9 +48,9 @@
   --color-text: var(--text);
   --color-muted: var(--muted);
   
-  --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-space-grotesk), sans-serif;
-  --font-mono: var(--font-ibm-plex-mono), monospace;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 
   /* Global scaled up font size hierarchy for Tailwind v4 */
   --text-xs: 0.875rem;
