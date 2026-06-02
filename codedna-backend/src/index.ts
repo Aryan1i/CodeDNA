@@ -291,35 +291,37 @@ app.post("/api/developer/profile/sync", async (req: any, res: any) => {
 
     const profileId = user.developerProfile.id;
 
+    const trimVal = (val: any) => typeof val === "string" ? val.trim() : val;
+
     // Update profile credentials first
     await prisma.developerProfile.update({
       where: { id: profileId },
       data: {
-        githubUsername: githubUsername !== undefined ? githubUsername : user.developerProfile.githubUsername,
-        leetcodeUsername: leetcodeUsername !== undefined ? leetcodeUsername : user.developerProfile.leetcodeUsername,
-        vercelToken: vercelToken !== undefined ? vercelToken : user.developerProfile.vercelToken,
-        gitlabUsername: gitlabUsername !== undefined ? gitlabUsername : user.developerProfile.gitlabUsername,
-        codeforcesUsername: codeforcesUsername !== undefined ? codeforcesUsername : user.developerProfile.codeforcesUsername,
-        kaggleUsername: kaggleUsername !== undefined ? kaggleUsername : user.developerProfile.kaggleUsername,
-        huggingfaceUsername: huggingfaceUsername !== undefined ? huggingfaceUsername : user.developerProfile.huggingfaceUsername,
-        netlifyToken: netlifyToken !== undefined ? netlifyToken : user.developerProfile.netlifyToken,
-        renderToken: renderToken !== undefined ? renderToken : user.developerProfile.renderToken,
-        gsocUsername: gsocUsername !== undefined ? gsocUsername : user.developerProfile.gsocUsername,
-        gssocUsername: gssocUsername !== undefined ? gssocUsername : user.developerProfile.gssocUsername
+        githubUsername: githubUsername !== undefined ? trimVal(githubUsername) : user.developerProfile.githubUsername,
+        leetcodeUsername: leetcodeUsername !== undefined ? trimVal(leetcodeUsername) : user.developerProfile.leetcodeUsername,
+        vercelToken: vercelToken !== undefined ? trimVal(vercelToken) : user.developerProfile.vercelToken,
+        gitlabUsername: gitlabUsername !== undefined ? trimVal(gitlabUsername) : user.developerProfile.gitlabUsername,
+        codeforcesUsername: codeforcesUsername !== undefined ? trimVal(codeforcesUsername) : user.developerProfile.codeforcesUsername,
+        kaggleUsername: kaggleUsername !== undefined ? trimVal(kaggleUsername) : user.developerProfile.kaggleUsername,
+        huggingfaceUsername: huggingfaceUsername !== undefined ? trimVal(huggingfaceUsername) : user.developerProfile.huggingfaceUsername,
+        netlifyToken: netlifyToken !== undefined ? trimVal(netlifyToken) : user.developerProfile.netlifyToken,
+        renderToken: renderToken !== undefined ? trimVal(renderToken) : user.developerProfile.renderToken,
+        gsocUsername: gsocUsername !== undefined ? trimVal(gsocUsername) : user.developerProfile.gsocUsername,
+        gssocUsername: gssocUsername !== undefined ? trimVal(gssocUsername) : user.developerProfile.gssocUsername
       }
     });
 
-    const activeGitHubUser = githubUsername !== undefined ? githubUsername : user.developerProfile.githubUsername;
-    const activeLeetCodeUser = leetcodeUsername !== undefined ? leetcodeUsername : user.developerProfile.leetcodeUsername;
-    const activeVercelToken = vercelToken !== undefined ? vercelToken : user.developerProfile.vercelToken;
-    const activeGitLabUser = gitlabUsername !== undefined ? gitlabUsername : user.developerProfile.gitlabUsername;
-    const activeCodeforcesUser = codeforcesUsername !== undefined ? codeforcesUsername : user.developerProfile.codeforcesUsername;
-    const activeKaggleUser = kaggleUsername !== undefined ? kaggleUsername : user.developerProfile.kaggleUsername;
-    const activeHuggingFaceUser = huggingfaceUsername !== undefined ? huggingfaceUsername : user.developerProfile.huggingfaceUsername;
-    const activeNetlifyToken = netlifyToken !== undefined ? netlifyToken : user.developerProfile.netlifyToken;
-    const activeRenderToken = renderToken !== undefined ? renderToken : user.developerProfile.renderToken;
-    const activeGSoCUser = gsocUsername !== undefined ? gsocUsername : user.developerProfile.gsocUsername;
-    const activeGSSoCUser = gssocUsername !== undefined ? gssocUsername : user.developerProfile.gssocUsername;
+    const activeGitHubUser = trimVal(githubUsername !== undefined ? githubUsername : user.developerProfile.githubUsername);
+    const activeLeetCodeUser = trimVal(leetcodeUsername !== undefined ? leetcodeUsername : user.developerProfile.leetcodeUsername);
+    const activeVercelToken = trimVal(vercelToken !== undefined ? vercelToken : user.developerProfile.vercelToken);
+    const activeGitLabUser = trimVal(gitlabUsername !== undefined ? gitlabUsername : user.developerProfile.gitlabUsername);
+    const activeCodeforcesUser = trimVal(codeforcesUsername !== undefined ? codeforcesUsername : user.developerProfile.codeforcesUsername);
+    const activeKaggleUser = trimVal(kaggleUsername !== undefined ? kaggleUsername : user.developerProfile.kaggleUsername);
+    const activeHuggingFaceUser = trimVal(huggingfaceUsername !== undefined ? huggingfaceUsername : user.developerProfile.huggingfaceUsername);
+    const activeNetlifyToken = trimVal(netlifyToken !== undefined ? netlifyToken : user.developerProfile.netlifyToken);
+    const activeRenderToken = trimVal(renderToken !== undefined ? renderToken : user.developerProfile.renderToken);
+    const activeGSoCUser = trimVal(gsocUsername !== undefined ? gsocUsername : user.developerProfile.gsocUsername);
+    const activeGSSoCUser = trimVal(gssocUsername !== undefined ? gssocUsername : user.developerProfile.gssocUsername);
 
     // Crawl GitHub
     const githubStats = activeGitHubUser 
