@@ -197,7 +197,7 @@ export default function Home() {
       } else {
         if (!otpSent) {
           setOtpSent(true);
-          setSuccess("Verification OTP sent! Check backend terminal logs for the 6-digit code.");
+          setSuccess("Verification OTP sent! Check your email inbox (or spam folder) for the code.");
         } else {
           setSuccess("Account verified and created successfully! Switching to login...");
           setTimeout(() => {
@@ -2068,7 +2068,7 @@ export default function Home() {
                       We have generated a 6-digit OTP code for <strong className="text-white">{email}</strong>.
                     </p>
                     <p className="text-[10px] text-electric-green/80 font-mono mt-2 bg-electric-green/5 border border-electric-green/10 p-2.5 rounded text-left">
-                      Since this is a local sandbox, please check your running backend terminal logs for the code.
+                      Verification code has been sent to your email. Please check your inbox (and spam folder). If running locally, you can also check your backend terminal logs.
                     </p>
                   </div>
 
@@ -2101,7 +2101,7 @@ export default function Home() {
                           });
                           const d = await res.json();
                           if (!res.ok) throw new Error(d.error || "Resend failed");
-                          setSuccess("New verification OTP logged to backend console!");
+                          setSuccess("New verification OTP sent to your email!");
                         } catch (err: any) {
                           setError(err.message);
                         } finally {
